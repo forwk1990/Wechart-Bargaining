@@ -8,39 +8,84 @@ class CountDown extends Component{
     constructor(props){
         super(props);
         this.state = {
-            day:0,
-            hours:0,
-            minutes:0,
-            seconds:0
+            day:"0",
+            hours:"0",
+            minutes:"0",
+            seconds:"0"
         };
     }
 
-    getSeconds(dateString){
-
+    /*
+    * 当组件装载到 DOM上后，启动定时器，开始倒计时
+    * */
+    componentDidMount(){
         // 截止日期转化为秒
-        const deadlineSeconds = Date.parse(dateString) * 0.001;
+        const deadlineSeconds = Date.parse(this.props.dateString) * 0.001;
 
         // 当前日期转化为秒
-        const currentSeconds = Date.parse(new Date()) * 0.001;
+        var currentSeconds = Date.parse(new Date()) * 0.001;
 
-        // 还剩多少秒
-        const diffSeconds = deadlineSeconds - currentSeconds;
-        const diffDate = new Date(diffSeconds);
-
+        // 设置当前截止日期
         const self = this;
-        setInterval(function()
-        {
-            self.setState({
-                day:diffDate.getDay(),
-                hours:diffDate.getHours(),
-                minutes:diffDate.getMinutes(),
-                seconds:diffDate.getSeconds()
-            });
-        }, 1000);
+        this.timer = setInterval(function () {
+            const diffSeconds = deadlineSeconds - (currentSeconds++);
+            self.setFullDate(diffSeconds);
+            if(diffSeconds <= 0){
+                clearInterval(self.timer);
+            }
+        }.bind(this), 1000);
+    }
+
+    /*
+    * 根据时间值，获取格式化后的时间字符串
+    * */
+    getFormatString(value){
+        var str = "";
+        if(value <= 0){
+            str = "00";
+        }
+        if(value > 0 && value < 10){
+            str = "0" + value;
+        }
+        if(value >=10 && value < 100){
+            str = value + "";
+        }
+        return str;
+    }
+
+    setFullDate(totalSeconds){
+        if(!totalSeconds) return 0;
+
+        var day = 0,
+            hours = 0,
+            minutes = 0,
+            seconds = 0;
+
+        if(totalSeconds >= 24 * 3600){
+            day = parseInt(totalSeconds / (24 * 3600));
+            totalSeconds = totalSeconds % (24 * 3600);
+        }
+        if(totalSeconds >= 3600){
+            hours = parseInt(totalSeconds / 3600);
+            totalSeconds = totalSeconds % 3600;
+        }
+        if(totalSeconds >= 60){
+            minutes = parseInt(totalSeconds / 60);
+            totalSeconds = totalSeconds % 60;
+        }
+        if(totalSeconds > 0){
+            seconds = totalSeconds;
+            totalSeconds = totalSeconds % (24 * 3600);
+        }
+        this.setState({
+            day:this.getFormatString(day),
+            hours:this.getFormatString(hours),
+            minutes:this.getFormatString(minutes),
+            seconds:this.getFormatString(seconds)
+        });
     }
 
     render(){
-        this.getSeconds("2016-11-01 00:09:00");
         return (
             <div className="row count-down">
                 <div className="small-3 columns">
@@ -87,6 +132,11 @@ class CountDown extends Component{
         );
     }
 
+}
+
+
+CountDown.propTypes = {
+    dateString : React.PropTypes.string
 }
 
 export default CountDown
