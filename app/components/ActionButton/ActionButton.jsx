@@ -29,7 +29,7 @@ class ActionButton extends Component{
     render(){
         if(this.props.isBelongTo == LinkBelongTo.Me){
             return (
-                <div className="row action-button-group">
+                <div className="row action-button-group" key="action-button-group">
                     <div className="small-6 columns padding-normal">
                         <span className="action-button gradient1" onClick={this.handleClick} value="buy">立即购买</span>
                     </div>
