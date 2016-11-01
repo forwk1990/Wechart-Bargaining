@@ -6,12 +6,17 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import ActionButton from './components/ActionButton/ActionButton.jsx';
-import CountDown from './components/CountDown/CountDown.jsx';
-import LoadingBar from './components/LoadingBar/LoadingBar.jsx';
+
 import "./stylesheets/foundation.min.css"
 import "./stylesheets/main.css";
 import "./javascripts/foundation.min.js"
+import "./javascripts/String.js"
+
+import ActionButton from './components/ActionButton/ActionButton.jsx';
+import CountDown from './components/CountDown/CountDown.jsx';
+import LoadingBar from './components/LoadingBar/LoadingBar.jsx';
+import Tab from './components/Tab/Tab.jsx';
+
 
 class Container extends React.Component {
 
@@ -55,10 +60,10 @@ class Container extends React.Component {
     render() {
         return (
             <div className="container">
-                <CountDown day="05" hour="23" minute="10" second="06"/>
+                <CountDown dateString="2016/11/08 12:00:00"/>
                 <div className="row rule">
                     <divc className="small-12 columns padding-normal">
-                        <a href="#" className="rule-link">活动规则</a>
+                        <a href="#action-rule" className="rule-link">活动规则</a>
                     </divc>
                 </div>
                 <LoadingBar money="464000"/>
@@ -71,6 +76,7 @@ class Container extends React.Component {
                     </div>
                 </div>
                 <ActionButton isBelongTo="0"/>
+                <Tab/>
             </div>
         );
     }

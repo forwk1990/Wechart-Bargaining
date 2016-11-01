@@ -18,7 +18,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js',
-        publicPath: "http://192.168.31.208:8787/build/"
+        publicPath: "http://192.168.2.112:8787/build/"
     },
 
     //热部署相关配置
@@ -34,7 +34,7 @@ module.exports = {
         watchOptions: {
             aggregateTimeout: 300
         },
-        host: "192.168.31.208",
+        host: "192.168.2.112",
         port: "8787"
     },
 
