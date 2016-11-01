@@ -5,8 +5,10 @@
 
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
+import FastClick from 'fastclick';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import "animate.css"
 import "./stylesheets/foundation.min.css"
 import "./stylesheets/main.css";
 import "./javascripts/foundation.min.js"
@@ -34,7 +36,11 @@ class Container extends React.Component {
 
     //当组件加载到DOM中之后调用
     componentDidMount() {
-
+        /*
+        * @reason:
+        *  mobile browsers will wait approximately 300ms from the time that you tap the button to fire the click event
+        * */
+        FastClick.attach(document.body);
     }
 
     //组件将要更新时调用
