@@ -7,6 +7,7 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactTrasitionGroupTest from './components/Test/ReactTrasitionGroupTest.jsx';
 
 import "animate.css"
 import "./stylesheets/foundation.min.css"
@@ -18,6 +19,7 @@ import ActionButton from './components/ActionButton/ActionButton.jsx';
 import CountDown from './components/CountDown/CountDown.jsx';
 import LoadingBar from './components/LoadingBar/LoadingBar.jsx';
 import Tab from './components/Tab/Tab.jsx';
+require("./components/Test/ReactTrasitionGroupTest.scss");
 
 
 class Container extends React.Component {
@@ -65,26 +67,29 @@ class Container extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <CountDown dateString="2016/11/08 12:00:00"/>
-                <div className="row rule">
-                    <divc className="small-12 columns padding-normal">
-                        <a href="#action-rule" className="rule-link">活动规则</a>
-                    </divc>
-                </div>
-                <LoadingBar money="464000"/>
-                <div className="row">
-                    <div className="small-6 columns padding-normal">
-                        <span className="price">原价¥{this.state.originalPrice}万</span>
-                    </div>
-                    <div className="small-6 columns padding-normal">
-                        <span className="product">奥迪A8</span>
-                    </div>
-                </div>
-                <ActionButton isBelongTo="0"/>
-                <Tab/>
-            </div>
+            <ReactTrasitionGroupTest/>
         );
+        //return (
+        //    <div className="container">
+        //        <CountDown dateString="2016/11/08 12:00:00"/>
+        //        <div className="row rule">
+        //            <divc className="small-12 columns padding-normal">
+        //                <a href="#action-rule" className="rule-link">活动规则</a>
+        //            </divc>
+        //        </div>
+        //        <LoadingBar money="464000"/>
+        //        <div className="row">
+        //            <div className="small-6 columns padding-normal">
+        //                <span className="price">原价¥{this.state.originalPrice}万</span>
+        //            </div>
+        //            <div className="small-6 columns padding-normal">
+        //                <span className="product">奥迪A8</span>
+        //            </div>
+        //        </div>
+        //        <ActionButton isBelongTo="0"/>
+        //        <Tab/>
+        //    </div>
+        //);
     }
 
 }
