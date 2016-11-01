@@ -9,7 +9,7 @@ import FastClick from 'fastclick';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactTrasitionGroupTest from './components/Test/ReactTrasitionGroupTest.jsx';
 
-import "animate.css"
+//import "test.css"
 import "./stylesheets/foundation.min.css"
 import "./stylesheets/main.css";
 import "./javascripts/foundation.min.js"
