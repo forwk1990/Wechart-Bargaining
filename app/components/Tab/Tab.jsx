@@ -170,7 +170,7 @@ class Tab extends Component{
     constructor(props){
         super(props);
         this.state = {
-            selectedIndex : 0
+            selectedIndex : 1
         };
     }
 

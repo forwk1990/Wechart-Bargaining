@@ -9,9 +9,10 @@ import FastClick from 'fastclick';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import TipWindow from './components/TipWindow/TipWindow.jsx';
 import ConfirmWindow from './components/ConfirmWindow/ConfirmWindow.jsx';
-import ReactTrasitionGroupTest from './components/Test/ReactTrasitionGroupTest.jsx';
+import $ from 'jquery';
 
-//import "test.css"
+import DataStore from './javascripts/components/DataStore.js'
+
 import "animate.css"
 import "./stylesheets/foundation.min.css"
 import "./stylesheets/main.css";
@@ -46,6 +47,8 @@ class Container extends React.Component {
         *  mobile browsers will wait approximately 300ms from the time that you tap the button to fire the click event
         * */
         FastClick.attach(document.body);
+
+        this.getBargainInfo();
     }
 
     //组件将要更新时调用
@@ -68,10 +71,15 @@ class Container extends React.Component {
         console.log("App will unmount");
     }
 
+    getBargainInfo(){
+        DataStore.getBargainInfo({url:'',code:'',id:''}).then(function(data){
+            console.info(data);
+        },function(error){
+            console.info(error);
+        });
+    }
+
     render() {
-        //return (
-        //    <TipWindow/>
-        //);
         return (
             <div className="container" onTouchMove={(e) => {console.info(e);}}>
                 <CountDown dateString="2016/11/08 12:00:00"/>
@@ -80,15 +88,7 @@ class Container extends React.Component {
                         <a href="#action-rule" className="rule-link">活动规则</a>
                     </divc>
                 </div>
-                <LoadingBar money="464000"/>
-                <div className="row">
-                    <div className="small-6 columns padding-normal">
-                        <span className="price">原价¥{this.state.originalPrice}万</span>
-                    </div>
-                    <div className="small-6 columns padding-normal">
-                        <span className="product">奥迪A8</span>
-                    </div>
-                </div>
+                <LoadingBar price="290000" originalPrice="580000"/>
                 <ActionButton isBelongTo="0"/>
                 <Tab/>
                 <TipWindow mode="me"/>

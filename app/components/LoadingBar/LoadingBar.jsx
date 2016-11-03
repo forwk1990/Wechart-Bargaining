@@ -10,27 +10,45 @@ class LoadingBar extends Component{
     }
 
     render(){
-        var money = (this.props.money * 0.0001).toFixed(2);
+        let price = (this.props.price * 0.0001).toFixed(2);
+        let originalPrice = (this.props.originalPrice * 0.0001).toFixed(2);
+        const percent = parseInt((price * 100) / originalPrice);
+        const progressStyle = {width:percent + "%"};
+        var triangleStyle = {};
+        var tipStyle = {marginLeft: percent + "%"};
+        if(percent >= 0 && percent <= 33){
+            triangleStyle = {left:"4px"};
+            tipStyle = {marginLeft: "calc(" +percent + "% - 8px)"};
+        }else if(percent >= 36 && percent <= 66){
+            triangleStyle = {left:"28px"};
+            tipStyle = {marginLeft: "calc(" +percent + "% - 35px)"};
+        }else{
+            triangleStyle = {left:"56px"};
+            tipStyle = {marginLeft: "calc("+percent+"% - 62px)"};
+        }
+
         return (
             <div className="row">
                 <div className="small-12 columns padding-normal">
-                    <div className="row">
-                        <div className="small-12 columns">
-                            <div className="row tip">
-                                <div className="small-12 columns padding-clear">
-                                    <span className="tip-content">¥{money}万</span>
-                                </div>
-                                <div className="small-12 columns padding-clear">
-                                    <span className="tip-flag">现价</span>
-                                </div>
-                                <span className="tip-triangle"></span>
-                            </div>
+                    <div className="row tip" style={tipStyle}>
+                        <div className="small-12 columns padding-clear">
+                            <span className="tip-content">¥{price}万</span>
                         </div>
+                        <div className="small-12 columns padding-clear">
+                            <span className="tip-flag">现价</span>
+                        </div>
+                        <span className="tip-triangle" style={triangleStyle}></span>
                     </div>
                 </div>
                 <div className="small-12 columns padding-normal loading-bar-border">
                     <div className="loading-bar-background"></div>
-                    <div className="loading-bar-progress"></div>
+                    <div className="loading-bar-progress" style={progressStyle}></div>
+                </div>
+                <div className="small-6 columns padding-normal">
+                    <span className="price">原价¥{originalPrice}万</span>
+                </div>
+                <div className="small-6 columns padding-normal">
+                    <span className="product">奥迪A8</span>
                 </div>
             </div>
         );
