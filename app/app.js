@@ -39,8 +39,10 @@ class Container extends React.Component {
             originalPrice: 0,
             name: "",
             deadline: '',
-            isMine:0
+            isMine:0,
+            isDisplayRuleTab :false
         };
+        this.ruleLinkHandleClick = this.ruleLinkHandleClick.bind(this);
     }
 
     //组件将要挂载时调用
@@ -101,18 +103,23 @@ class Container extends React.Component {
         console.log("App will unmount");
     }
 
+    ruleLinkHandleClick(){
+        //console.info("rule click");
+        this.setState({isDisplayRuleTab:true});
+    }
+
     render() {
         return this.state.ready ? (
             <div className="container" onTouchMove={(e) => {console.info(e);}}>
                 <CountDown deadline={this.state.deadline}/>
                 <div className="row rule">
                     <divc className="small-12 columns padding-normal">
-                        <a href="#action-rule" className="rule-link">活动规则</a>
+                        <a href="#tab" className="rule-link" onClick={this.ruleLinkHandleClick}>活动规则</a>
                     </divc>
                 </div>
                 <LoadingBar price={this.state.price} originalPrice={this.state.originalPrice}/>
                 <ActionButton isMine={this.state.isMine}/>
-                <Tab/>
+                <Tab isDisplayRuleTab={this.state.isDisplayRuleTab}/>
                 {this.state.shouldBargin && (
                     <TipWindow name={this.state.name}
                                isMine={true}
