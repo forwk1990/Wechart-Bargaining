@@ -104,7 +104,8 @@ class Container extends React.Component {
         this.setState({isDisplayRuleTab:true});
         var $root = $('html, body');
         $root.animate({
-            scrollTop: $(event.target).offset().top + 174
+            //scrollTop: $(event.target).offset().top + 174
+            scrollTop: $("#tab").offset().top
         }, 500);
     }
 
