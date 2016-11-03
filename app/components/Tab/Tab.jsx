@@ -147,7 +147,7 @@ class TabPageRulePage extends Component{
             className = className + " active";
         }
         return (
-            <div className={className} id="action-rule">
+            <div className={className}>
                 <p>
                     1) 188元红包仅限从未在京东下单的新用户领取，每个用户仅限领取1次;<br/><br/>
                     2) 用户在页面完成短信验证可领取68元组合优惠券，通过实名认证可领取120元组合优惠券。部分幸运用户有机会省略短信验证直接领取68元组合优惠券，极少数幸运用户有机会直接通过实名认证一键领取全部188元红包；<br/><br/>
@@ -161,24 +161,31 @@ class TabPageRulePage extends Component{
     }
 }
 
-class HandleClickEvent extends Function{
-
-}
 
 class Tab extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            selectedIndex : 0
+            selectedIndex : 1
         };
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        this.setState({selectedIndex:1});
+        return true;
+    }
+
+    //组件状态更新时调用
+    componentDidUpdate(prevProps, prevState) {
+
     }
 
     render(){
         const self = this;
         const titles = ["助砍好友榜单","活动规则","参与榜"];
         return (
-            <div className="row">
+            <div className="row" id="tab">
                 <div className="small-12 columns tab padding-clear">
                     <div className="row tab-bar padding-clear">
                         {titles.map(function(title,index){

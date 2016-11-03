@@ -1,25 +1,25 @@
 @import url(test.css);
-.example-enter {
-  opacity: 0.01; }
+.enter {
+  opacity: 0.01;
+  color: gold; }
 
 .example-enter.example-enter-active {
   opacity: 0.5;
-  -webkit-animation-name: zoomIn;
-  animation-name: zoomIn; }
+  color: blue; }
 
-.example-leave {
+.leave {
   opacity: 1; }
 
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in; }
-
-.example-appear {
-  opacity: 0.01; }
+.tryme {
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+  -webkit-animation-name: bounceOut;
+  animation-name: bounceOut; }
 
 .example-appear.example-appear-active {
-  opacity: 0.5;
-  -webkit-animation-name: zoomIn;
-  animation-name: zoomIn; }
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown; }
 
 /*# sourceMappingURL=ReactTrasitionGroupTest.css.map */

@@ -20,7 +20,7 @@ class CountDown extends Component{
     * */
     componentDidMount(){
         // 截止日期转化为秒
-        const deadlineSeconds = Date.parse(this.props.dateString) * 0.001;
+        const deadlineSeconds = Date.parse(this.props.deadline) * 0.001;
 
         // 当前日期转化为秒
         var currentSeconds = Date.parse(new Date()) * 0.001;

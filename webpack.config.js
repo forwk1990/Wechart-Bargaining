@@ -13,12 +13,15 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const host = "192.168.2.112"; // 家用
+//const host = "192.168.31.208"; // 公司
+
 module.exports = {
     entry: path.resolve(__dirname, 'app/app.js'),
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js',
-        publicPath: "http://192.168.2.112:8787/build/"
+        publicPath: "http://"+host+":8787/build/"
     },
 
     //热部署相关配置
@@ -34,7 +37,7 @@ module.exports = {
         watchOptions: {
             aggregateTimeout: 300
         },
-        host: "192.168.2.112",
+        host: host,
         port: "8787"
     },
 
@@ -63,7 +66,6 @@ module.exports = {
              filename: 'index.html',
              template:'template/index.template.html',      //按照此文件内容生成index.html
              inject: 'body',
-             //favicon:'./images/logo-small.png',           //自定义logo
              minify: false,
              hash: true,
              cache: false,

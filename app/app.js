@@ -7,13 +7,17 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import ReactTrasitionGroupTest from './components/Test/ReactTrasitionGroupTest.jsx';
+import TipWindow from './components/TipWindow/TipWindow.jsx';
 
-//import "test.css"
+
+import DataStore from './javascripts/components/DataStore.js'
+
+import "animate.css"
 import "./stylesheets/foundation.min.css"
 import "./stylesheets/main.css";
 import "./javascripts/foundation.min.js"
 import "./javascripts/String.js"
+import $ from 'jquery'
 
 import ActionButton from './components/ActionButton/ActionButton.jsx';
 import CountDown from './components/CountDown/CountDown.jsx';
@@ -27,8 +31,18 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          originalPrice:58
+            ready: false,
+            originalPrice: 58,
+            shouldBargin: false,
+            money: 0,
+            price: 0,
+            originalPrice: 0,
+            name: "",
+            deadline: '',
+            isMine:0,
+            isDisplayRuleTab :false
         };
+        this.ruleLinkHandleClick = this.ruleLinkHandleClick.bind(this);
     }
 
     //组件将要挂载时调用
@@ -38,11 +52,32 @@ class Container extends React.Component {
 
     //当组件加载到DOM中之后调用
     componentDidMount() {
+        let self = this;
         /*
-        * @reason:
-        *  mobile browsers will wait approximately 300ms from the time that you tap the button to fire the click event
-        * */
+         * @reason:
+         *  mobile browsers will wait approximately 300ms from the time that you tap the button to fire the click event
+         * */
         FastClick.attach(document.body);
+
+        /*
+        * 获取首页显示的砍价信息
+        * */
+        DataStore.getBargainInfo({url: '', code: '', id: ''}).then(function (responseObject) {
+            responseObject["isFirst"] && self.setState({shouldBargin: true});
+
+            self.setState({
+                    ready: true,
+                    money: responseObject.money,
+                    price: responseObject.price,
+                    originalPrice: responseObject.originalPrice,
+                    name: responseObject.name,
+                    deadline: responseObject.deadline,
+                    isMine:responseObject.isMine
+                }
+            );
+        }, function (error) {
+
+        });
     }
 
     //组件将要更新时调用
@@ -65,31 +100,34 @@ class Container extends React.Component {
         console.log("App will unmount");
     }
 
+    ruleLinkHandleClick(event){
+        this.setState({isDisplayRuleTab:true});
+        var $root = $('html, body');
+        $root.animate({
+            scrollTop: $(event.target).offset().top + 174
+        }, 500);
+    }
+
     render() {
-        return (
-            <ReactTrasitionGroupTest/>
-        );
-        //return (
-        //    <div className="container">
-        //        <CountDown dateString="2016/11/08 12:00:00"/>
-        //        <div className="row rule">
-        //            <divc className="small-12 columns padding-normal">
-        //                <a href="#action-rule" className="rule-link">活动规则</a>
-        //            </divc>
-        //        </div>
-        //        <LoadingBar money="464000"/>
-        //        <div className="row">
-        //            <div className="small-6 columns padding-normal">
-        //                <span className="price">原价¥{this.state.originalPrice}万</span>
-        //            </div>
-        //            <div className="small-6 columns padding-normal">
-        //                <span className="product">奥迪A8</span>
-        //            </div>
-        //        </div>
-        //        <ActionButton isBelongTo="0"/>
-        //        <Tab/>
-        //    </div>
-        //);
+        return this.state.ready ? (
+            <div className="container" onTouchMove={(e) => {console.info(e);}}>
+                <CountDown deadline={this.state.deadline}/>
+                <div className="row rule">
+                    <divc className="small-12 columns padding-normal">
+                        <a href="#tab" className="rule-link" onClick={this.ruleLinkHandleClick}>活动规则</a>
+                    </divc>
+                </div>
+                <LoadingBar price={this.state.price} originalPrice={this.state.originalPrice}/>
+                <ActionButton isMine={this.state.isMine}/>
+                <Tab isDisplayRuleTab={this.state.isDisplayRuleTab}/>
+                {this.state.shouldBargin && (
+                    <TipWindow name={this.state.name}
+                               isMine={true}
+                               money={this.state.money}
+                               price={this.state.price}
+                               originalPrice={this.state.originalPrice}/>)}
+            </div>
+        ) : (<img src={require('./images/loading.gif')} alt='loading' className="loading"/>);
     }
 
 }

@@ -34,16 +34,22 @@ class ReactTrasitionGroupTest extends Component {
                 {item}
             </div>
         ));
-
         return (
             <div>
                 <button onClick={this.handleAdd}>Add Item</button>
                 <ReactCSSTransitionGroup
-                    transitionName="example"
-                    transitionEnterTimeout={500}
                     transitionAppear={true}
-                    transitionAppearTimeout={500}
-                    transitionLeaveTimeout={300}>
+                    transitionAppearTimeout={1000}
+                    transitionLeaveTimeout={1000}
+                    transitionEnterTimeout={3000}
+                    transitionName={ {
+                        enter: 'enter',
+                        enterActive: 'example-enter-active',
+                        leave: 'leave',
+                        leaveActive: 'tryme',
+                        appear: 'example-appear',
+                        appearActive: 'example-appear-active'
+                      } }>
                     {items}
                 </ReactCSSTransitionGroup>
             </div>

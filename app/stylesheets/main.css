@@ -2,34 +2,18 @@ html{font-size:16px;}
 /*html { font-size: 62.5%; }*/
 
 body{
-    /*background-color:#000000;*/
+    background-color:#000000;
 }
 
-.example-enter {
-    opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-    opacity: 1;
-}
-
-.example-leave.example-leave-active {
-    opacity: 0.01;
-    transition: opacity 300ms ease-in;
-}
-
-.example-appear {
-    opacity: 0.01;
-}
-
-.example-appear.example-appear-active {
-    opacity: 1;
-    transition: opacity .5s ease-in;
+.loading{
+    display:block;
+    width: 110px;
+    height:110px;
+    position:absolute;
+    top:calc(50% - 55px);
+    top:-webkit-calc(50% - 55px);
+    left:calc(50% - 55px);
+    left:-webkit-calc(50% - 55px);
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio : 2) ,
@@ -75,7 +59,20 @@ only screen and (min--moz-device-pixel-ratio: 3) {
     padding-right:0;
 }
 
+.action-button-group{
+    margin-top:0.375rem;
+}
 
+.action-button{
+    display: inline-block;
+    width:100%;
+    height:2rem;
+    text-align: center;
+    line-height: 2rem;
+    font-size: 0.75rem;
+    box-sizing: border-box;
+    border-radius: 0.2rem;
+}
 
 .gradient1{
     background-image: -webkit-linear-gradient(left, color-stop(#00c7ff 0), color-stop(#06dde2 100%));
