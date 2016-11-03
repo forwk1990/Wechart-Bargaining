@@ -10,7 +10,12 @@ class TipWindow extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {visible: 1};
+        this.state = {
+            visible: 1,
+            originalPrice:0,
+            price:0,
+            money:0
+        };
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -23,7 +28,11 @@ class TipWindow extends Component {
     }
 
     render() {
-        const title = this.props.mode == "me" ? "为自己砍了" : "你帮TA砍了"
+        const title = this.props.isMine == true ? "为自己砍了" : "你帮TA砍了";
+        const originalPrice = (this.props.originalPrice * 0.0001).toFixed(2);
+        const price = (this.props.price * 0.0001).toFixed(2);
+        const money = (this.props.money).toFixed(0);
+        const name = this.props.name;
         return (
             <div ref="tipContainer">
                 <ReactCSSTransitionGroup
@@ -53,13 +62,13 @@ class TipWindow extends Component {
                                 <div className="tip-modal-content open">
                                     <p className="title">{title}</p>
 
-                                    <p className="cut-price">¥8500</p>
+                                    <p className="cut-price">¥{money}</p>
 
-                                    <p className="product-name">奥迪A8</p>
+                                    <p className="product-name">{name}</p>
 
-                                    <p className="product-origin-price">原价¥666万</p>
+                                    <p className="product-origin-price">原价¥{originalPrice}万</p>
 
-                                    <p className="product-price">现价¥640万</p>
+                                    <p className="product-price">现价¥{price}万</p>
 
                                     <div className="row know">
                                         <div className="small-12 columns padding-normal">
@@ -75,7 +84,13 @@ class TipWindow extends Component {
             </div>
         );
     }
+}
 
+TipWindow.proptypes = {
+    price:React.PropTypes.number.isRequired,
+    originalPrice:React.PropTypes.number.isRequired,
+    money:React.PropTypes.number.isRequired,
+    isMine:React.PropTypes.bool.isRequired
 }
 
 export default TipWindow

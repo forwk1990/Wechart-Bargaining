@@ -66,7 +66,6 @@ module.exports = {
              filename: 'index.html',
              template:'template/index.template.html',      //按照此文件内容生成index.html
              inject: 'body',
-             //favicon:'./images/logo-small.png',           //自定义logo
              minify: false,
              hash: true,
              cache: false,

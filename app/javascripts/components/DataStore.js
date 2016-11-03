@@ -3,7 +3,7 @@
  */
 
 // 启动Ajax拦截
-//require('./HttpRequestMock.js');
+require('./HttpRequestMock.js');
 
 let AppConfig = require("./AppConfig.js");
 
@@ -28,7 +28,6 @@ let sendRequest = function(url,parameters){
         client.open('POST',url);
         client.onreadystatechange = handler;
         client.responseType = 'json';
-
         client.setRequestHeader('Accept','application/json');
         client.send(formData);
 
@@ -37,7 +36,12 @@ let sendRequest = function(url,parameters){
                 return;
             }
             if(this.status === 200){
-                resolve(this.response);
+                const responseObject = JSON.parse(this.response);
+                if(responseObject.status == 1){
+                    resolve(responseObject.data);
+                }else{
+                    reject("this must be server error!");
+                }
             }else{
                 reject(new Error(this.statusText));
             }

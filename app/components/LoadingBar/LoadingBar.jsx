@@ -12,7 +12,7 @@ class LoadingBar extends Component{
     render(){
         let price = (this.props.price * 0.0001).toFixed(2);
         let originalPrice = (this.props.originalPrice * 0.0001).toFixed(2);
-        const percent = parseInt((price * 100) / originalPrice);
+        const percent = parseInt(((originalPrice-price) * 100) / originalPrice);
         const progressStyle = {width:percent + "%"};
         var triangleStyle = {};
         var tipStyle = {marginLeft: percent + "%"};
