@@ -2,8 +2,12 @@
  * Created by itachi on 16/11/3.
  */
 
-// 启动Ajax拦截
-require('./HttpRequestMock.js');
+/*
+* 开发环境下，开启HttpRequestMock。
+* */
+if(__DEV__){
+    require("../utils/HttpRequestMock.js");
+}
 
 let AppConfig = require("./AppConfig.js");
 

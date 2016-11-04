@@ -7,21 +7,20 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import TipWindow from './components/TipWindow/TipWindow.jsx';
-import ConfirmWindow from './components/ConfirmWindow/ConfirmWindow.jsx';
+import TipWindow from './views/TipWindow/TipWindow.jsx';
+import ConfirmWindow from './views/ConfirmWindow/ConfirmWindow.jsx';
 
 
-import DataStore from './javascripts/components/DataStore.js'
+import DataStore from './libs/components/DataStore.js'
 
 import "animate.css"
-import "./stylesheets/foundation.min.css"
-import "./stylesheets/main.css";
+import "./assets/stylesheets/foundation.min.css"
+import "./assets/stylesheets/main.scss";
 import $ from 'jquery';
 
-import CountDown from './components/CountDown/CountDown.jsx';
-import LoadingBar from './components/LoadingBar/LoadingBar.jsx';
-import Tab from './components/Tab/Tab.jsx';
-require("./components/Test/ReactTrasitionGroupTest.scss");
+import CountDown from './views/CountDown/CountDown.jsx';
+import LoadingBar from './views/LoadingBar/LoadingBar.jsx';
+import Tab from './views/Tab/Tab.jsx';
 
 
 class Container extends React.Component {
@@ -143,14 +142,13 @@ class Container extends React.Component {
 
     render() {
 
-
         return this.state.ready ? (
             <div className="container" onTouchMove={(e) => {console.info(e);}}>
                 <CountDown deadline={this.state.deadline}/>
                 <div className="row rule">
-                    <divc className="small-12 columns padding-normal">
+                    <div className="small-12 columns padding-normal">
                         <a href="#tab" className="rule-link" onClick={this.ruleLinkHandleClick}>活动规则</a>
-                    </divc>
+                    </div>
                 </div>
                 <LoadingBar name={this.state.name} price={this.state.price} originalPrice={this.state.originalPrice}/>
                 {this.state.isMine
@@ -182,7 +180,7 @@ class Container extends React.Component {
                                originalPrice={this.state.originalPrice} closeCallback={()=>{this.confirmCallback()}}/>)}
 
             </div>
-        ) : (<img src={require('./images/loading.gif')} alt='loading' className="loading"/>);
+        ) : (<img src={require('./assets/images/loading.gif')} alt='loading' className="loading"/>);
     }
 
 }

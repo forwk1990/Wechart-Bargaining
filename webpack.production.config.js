@@ -13,8 +13,8 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-//const host = "192.168.2.112"; // 家用
-const host = "192.168.31.208"; // 公司
+const host = "192.168.2.112"; // 家用
+//const host = "192.168.31.208"; // 公司
 
 module.exports = {
     entry: path.resolve(__dirname, 'app/app.js'),
@@ -23,9 +23,8 @@ module.exports = {
         * the output.path directory as absolute path
         * */
         path: path.join(__dirname, 'dist'),
-        filename: 'index.js',
-        publicPath: "http://"+host+":8787/",
-        vendors:['jquery']
+        filename: 'javascripts/index.js',
+        publicPath: "http://"+host+":8787/"
     },
 
     //热部署相关配置
@@ -82,6 +81,16 @@ module.exports = {
             compress: {
                 warnings: false
             },
+        }),
+        /*
+         * The Webpack DefinePlugin allows you to create "Magic" global variables for your app
+         * that Webpack will replace when it bundles your project.
+         * The cool thing about this is that it does a literal replacement of the variable with the string you assign.
+         * I used this functionality to eliminate a separate,
+         * conditionally included "development" JavaScript file
+         * */
+        new webpack.DefinePlugin({
+            __DEV__: 'false'
         })
     ],
 
@@ -97,7 +106,7 @@ module.exports = {
 		},
 		{
 			   test: /\.(png|jpg|gif)$/,
-			   loader: 'url-loader?limit=204800&name=images/[name].[ext]' // 这里的 limit=8192 表示用 base64 编码 <= ８K 的图像 大于这个尺寸的图片会拷贝到build目录下
+			   loader: 'url-loader?limit=20480&name=images/[name].[ext]' // 这里的 limit=8192 表示用 base64 编码 <= ８K 的图像 大于这个尺寸的图片会拷贝到build目录下
 		},
 		{
 			 test: /\.css$/,

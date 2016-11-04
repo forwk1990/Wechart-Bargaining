@@ -4,7 +4,7 @@
 
 var Mock = require("mockjs");
 var MockRandom = Mock.Random;
-var AppConfig = require("./AppConfig.js");
+var AppConfig = require("./../components/AppConfig.js");
 
 // 配置请求的相应时间
 Mock.setup({timeout:'2000-3000'});

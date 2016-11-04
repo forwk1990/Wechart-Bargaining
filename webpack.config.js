@@ -2,6 +2,7 @@
  * Created by Rains
  * on 2016-10-20.
  */
+
  var path = require('path');
  var webpack = require('webpack');
  //var WebpackDevServer = require("webpack-dev-server");
@@ -17,8 +18,8 @@ var isProduction = function () {
     return process.env.NODE_ENV === 'production';
 };
 
-//const host = "192.168.2.112"; // 家用
-const host = "192.168.31.208"; // 公司
+const host = "192.168.2.112"; // 家用
+//const host = "192.168.31.208"; // 公司
 
 module.exports = {
     entry: path.resolve(__dirname, 'app/app.js'),
@@ -27,7 +28,7 @@ module.exports = {
         * the output.path directory as absolute path
         * */
         path: path.join(__dirname, 'dist'),
-        filename: 'index.js',git
+        filename: 'index.js',
         publicPath: "http://"+host+":8787/"
     },
 
@@ -78,6 +79,17 @@ module.exports = {
             cache: false,
             showErrors: false
 
+        }),
+
+        /*
+        * The Webpack DefinePlugin allows you to create "Magic" global variables for your app
+        * that Webpack will replace when it bundles your project.
+        * The cool thing about this is that it does a literal replacement of the variable with the string you assign.
+        * I used this functionality to eliminate a separate,
+        * conditionally included "development" JavaScript file
+        * */
+        new webpack.DefinePlugin({
+            __DEV__: 'true'
         })
     ],
     module: {
@@ -100,7 +112,7 @@ module.exports = {
 		},
         {
             test: /\.scss$/,
-            loaders: ["style", "css", "sass"]
+            loaders: ["style", 'css', "sass"]
         }
 	]
   }

@@ -25,7 +25,7 @@
     z-index: 1005;
     left: calc(50% - 6rem);
     left: -webkit-calc(50% - 6rem);
-    background: url("../../images/dialog-background.png") top center no-repeat;
+    background: url("../../assets/images/dialog-background.png") top center no-repeat;
     background-size: cover;
     padding: 1.66667rem;
     border: solid 1px #02f0ff;

@@ -1,7 +1,7 @@
 
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import './Tab.css'
+import './Tab.scss'
 
 function stringFormat() {
     var s = arguments[0];

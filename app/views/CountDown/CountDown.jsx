@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import './CountDown.css'
+import './CountDown.scss'
 
 
 class CountDown extends Component{
