@@ -13,6 +13,8 @@ class ActionButton extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {isConfirmWindowDisplay:false};
+
         this.handleBuyClick = this.handleBuyClick.bind(this);
         this.handleHelpClick = this.handleHelpClick.bind(this);
         this.handleJoinClick = this.handleJoinClick.bind(this);

@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import TipWindow from './components/TipWindow/TipWindow.jsx';
+import ConfirmWindow from './components/ConfirmWindow/ConfirmWindow.jsx';
 
 
 import DataStore from './javascripts/components/DataStore.js'
@@ -15,11 +16,8 @@ import DataStore from './javascripts/components/DataStore.js'
 import "animate.css"
 import "./stylesheets/foundation.min.css"
 import "./stylesheets/main.css";
-import "./javascripts/foundation.min.js"
-import "./javascripts/String.js"
-import $ from 'jquery'
+import $ from 'jquery';
 
-import ActionButton from './components/ActionButton/ActionButton.jsx';
 import CountDown from './components/CountDown/CountDown.jsx';
 import LoadingBar from './components/LoadingBar/LoadingBar.jsx';
 import Tab from './components/Tab/Tab.jsx';
@@ -31,6 +29,7 @@ class Container extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isConfirmWindowDisplay:false,
             ready: false,
             originalPrice: 58,
             shouldBargin: false,
@@ -43,6 +42,9 @@ class Container extends React.Component {
             isDisplayRuleTab :false
         };
         this.ruleLinkHandleClick = this.ruleLinkHandleClick.bind(this);
+        this.handleBuyClick = this.handleBuyClick.bind(this);
+        this.handleHelpClick = this.handleHelpClick.bind(this);
+        this.handleJoinClick = this.handleJoinClick.bind(this);
     }
 
     //组件将要挂载时调用
@@ -100,16 +102,48 @@ class Container extends React.Component {
         console.log("App will unmount");
     }
 
-    ruleLinkHandleClick(event){
+    ruleLinkHandleClick(){
         this.setState({isDisplayRuleTab:true});
-        var $root = $('html, body');
-        $root.animate({
-            //scrollTop: $(event.target).offset().top + 174
+        $('html, body').animate({
             scrollTop: $("#tab").offset().top
         }, 500);
     }
 
+    /*
+     * 立即购买按钮点击事件
+     * */
+    handleBuyClick(event){
+        this.setState({
+            isConfirmWindowDisplay:true
+        });
+    }
+
+    /*
+     * 找人帮砍按钮点击事件
+     * */
+    handleHelpClick(event){
+
+    }
+
+    /*
+     * 我也要参加点击事件
+     * */
+    handleJoinClick(event){
+
+    }
+
+    /*
+    * 确认弹窗回调
+    * */
+    confirmCallback(){
+        this.setState({
+            isConfirmWindowDisplay:false
+        });
+    }
+
     render() {
+
+
         return this.state.ready ? (
             <div className="container" onTouchMove={(e) => {console.info(e);}}>
                 <CountDown deadline={this.state.deadline}/>
@@ -118,8 +152,23 @@ class Container extends React.Component {
                         <a href="#tab" className="rule-link" onClick={this.ruleLinkHandleClick}>活动规则</a>
                     </divc>
                 </div>
-                <LoadingBar price={this.state.price} originalPrice={this.state.originalPrice}/>
-                <ActionButton isMine={this.state.isMine}/>
+                <LoadingBar name={this.state.name} price={this.state.price} originalPrice={this.state.originalPrice}/>
+                {this.state.isMine
+                ? (
+                <div className="row action-button-group" key="action-button-group">
+                    <div className="small-6 columns padding-normal">
+                        <span className="action-button gradient1" onClick={this.handleBuyClick} value="buy">立即购买</span>
+                    </div>
+                    <div className="small-6 columns padding-normal">
+                        <span className="action-button gradient2" onClick={this.handleHelpClick}>找人帮砍</span>
+                    </div>
+                </div>)
+                : (
+                <div className="row action-button-group">
+                    <div className="small-12 columns padding-normal">
+                        <span className="action-button gradient1" onClick={this.handleJoinClick}>我也要参加</span>
+                    </div>
+                </div>)}
                 <Tab isDisplayRuleTab={this.state.isDisplayRuleTab}/>
                 {this.state.shouldBargin && (
                     <TipWindow name={this.state.name}
@@ -127,6 +176,11 @@ class Container extends React.Component {
                                money={this.state.money}
                                price={this.state.price}
                                originalPrice={this.state.originalPrice}/>)}
+                {this.state.isConfirmWindowDisplay && (
+                    <ConfirmWindow name={this.state.name}
+                               price={this.state.price}
+                               originalPrice={this.state.originalPrice} closeCallback={()=>{this.confirmCallback()}}/>)}
+
             </div>
         ) : (<img src={require('./images/loading.gif')} alt='loading' className="loading"/>);
     }

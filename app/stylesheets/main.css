@@ -44,7 +44,8 @@ only screen and (min--moz-device-pixel-ratio: 3) {
     margin:0;
     width:100%;
     height:100%;
-    background:url("../images/container_background.jpg") no-repeat;
+    background:url("../images/background.png") no-repeat;
+    /*background:url("../images/container_background.jpg") no-repeat;*/
     /*background-size:cover;*/
     background-size:100% auto;
 }
@@ -144,4 +145,27 @@ only screen and (min--moz-device-pixel-ratio: 3) {
     border:1px solid #017598;
     background-color:#000000;
     border-radius:9px;
+}
+
+.dialog-appear{
+    opacity: 0.01;
+}
+
+.dialog-appear-active{
+    opacity: 1;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-name: bounceInDown;
+    animation-name: bounceInDown;
+}
+
+.dialog-leave{
+    animation-duration: 0.8s;
+    -webki-webkit-animation-name: zoomOut;
+    animation-name: zoomOut;
+}
+
+.dialog-leave-active{
+    /*animation-duration: 0.8s;*/
+    opacity: 0.01;
 }

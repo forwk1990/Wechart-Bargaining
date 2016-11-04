@@ -13,10 +13,6 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var isProduction = function () {
-    return process.env.NODE_ENV === 'production';
-};
-
 //const host = "192.168.2.112"; // 家用
 const host = "192.168.31.208"; // 公司
 
@@ -27,8 +23,9 @@ module.exports = {
         * the output.path directory as absolute path
         * */
         path: path.join(__dirname, 'dist'),
-        filename: 'index.js',git
-        publicPath: "http://"+host+":8787/"
+        filename: 'index.js',
+        publicPath: "http://"+host+":8787/",
+        vendors:['jquery']
     },
 
     //热部署相关配置
@@ -68,18 +65,26 @@ module.exports = {
         }),
 
         //生成index.html页面
-        new HtmlWebpackPlugin({
-            title: '砍价',
-            filename: 'index.html',
-            template:'template/index.template.html',      //按照此文件内容生成index.html
-            inject: 'body',
-            minify: false,
-            hash: true,
-            cache: false,
-            showErrors: false
+         new HtmlWebpackPlugin({
+             title: '砍价',
+             filename: 'index.html',
+             template:'template/index.template.html',      //按照此文件内容生成index.html
+             inject: 'body',
+             minify: false,
+             hash: true,
+             cache: false,
+             showErrors: false
 
+         }),
+        // 代码压缩
+        new webpack.optimize.UglifyJsPlugin({
+            test: /(\.jsx|\.js)$/,
+            compress: {
+                warnings: false
+            },
         })
     ],
+
     module: {
 	loaders: [
 		{
@@ -92,7 +97,7 @@ module.exports = {
 		},
 		{
 			   test: /\.(png|jpg|gif)$/,
-			   loader: 'url-loader?limit=184800&name=images/[name].[ext]' // 这里的 limit=8192 表示用 base64 编码 <= ８K 的图像 大于这个尺寸的图片会拷贝到build目录下
+			   loader: 'url-loader?limit=204800&name=images/[name].[ext]' // 这里的 limit=8192 表示用 base64 编码 <= ８K 的图像 大于这个尺寸的图片会拷贝到build目录下
 		},
 		{
 			 test: /\.css$/,

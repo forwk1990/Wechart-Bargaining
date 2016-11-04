@@ -27,6 +27,8 @@ class LoadingBar extends Component{
             tipStyle = {marginLeft: "calc("+percent+"% - 62px)"};
         }
 
+        let name = this.props.name;
+
         return (
             <div className="row">
                 <div className="small-12 columns padding-normal">
@@ -48,7 +50,7 @@ class LoadingBar extends Component{
                     <span className="price">原价¥{originalPrice}万</span>
                 </div>
                 <div className="small-6 columns padding-normal">
-                    <span className="product">奥迪A8</span>
+                    <span className="product">{name}</span>
                 </div>
             </div>
         );

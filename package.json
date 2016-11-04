@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack",
-    "server": "webpack-dev-server --line --hot"
+    "server": "webpack-dev-server --line --hot --progress --colors",
+    "deploy":"NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
   "keywords": [],
   "author": "",

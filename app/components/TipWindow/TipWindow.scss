@@ -1,5 +1,4 @@
 
-
 .tip-modal{
   display:block;
 
@@ -96,27 +95,4 @@
   }
 }
 
-.tip-content-appear{
-  opacity: 0.01;
-}
-
-.tip-content-appear-active{
-  opacity: 1;
-  -webkit-animation-duration: .5s;
-  animation-duration: .5s;
-  -webkit-animation-name: bounceInDown;
-  animation-name: bounceInDown;
-}
-
-.tip-content-leave{
-  opacity: 1;
-}
-
-.tip-content-leave-active{
-  //opacity: 0.01;
-  -webkit-animation-duration: .5s;
-  animation-duration: .5s;
-  -webkit-animation-name: zoomOut;
-  animation-name: zoomOut;
-}
 
