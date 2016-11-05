@@ -14,8 +14,8 @@ Mock.mock(AppConfig.ApiConfig.getBarginInfo,{
     'status':1,
     'data':{
         'openId': '@string',
-        'isMine': 1,
-        'isFirst': 1,
+        'isMine|0-1': 1,
+        'isFirst|0-1': 1,
         'money':MockRandom.integer(30000,40000),
         'price':MockRandom.integer(100000,500000),
         'originalPrice':MockRandom.integer(500000,600000),

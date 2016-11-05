@@ -24,7 +24,7 @@ class ConfirmWindow extends Component {
         var self = this;
         setTimeout(function(){
             self.props.closeCallback();
-        },1100);
+        },800);
     }
 
 
@@ -48,7 +48,7 @@ class ConfirmWindow extends Component {
                 <div className="confirm-modal-bg" style={bgStyle}></div>
                 <ReactCSSTransitionGroup
                     transitionEnter={false}
-                    transitionLeave={true} transitionLeaveTimeout={1000}
+                    transitionLeave={true} transitionLeaveTimeout={800}
                     transitionAppear={true} transitionAppearTimeout={1000}
                     transitionName={ {
                             leave: 'dialog-leave',
