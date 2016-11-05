@@ -1,5 +1,36 @@
 
+.cd-row{
+    display:block;
+    width:7.1rem;
+    margin:0 auto;
+    z-index:2;
 
+    .cd-column{
+        width:1.5rem;
+        display:block;
+        padding-left:0px;
+        padding-right:0px;
+        text-align: center;
+        font-weight: 500;
+        color:#ffffff;
+    }
+
+    .cd-column.cd-column-title{
+        font-size:0.4rem;
+        line-height: 0.6rem;
+        text-shadow:0rem 0rem 0.2rem #000000;
+    }
+    .cd-column.cd-column-value{
+        display:inline-block;
+        height:1.5rem;
+        line-height: 1.5rem;
+        background: url("../../assets/images/count-down-background.png") top center;
+        background-size: 1.5rem 1.5rem;
+        font-size:1.15rem;
+        box-sizing: border-box;
+        border-radius: 0.3rem;
+    }
+}
 
 .count-down{
     display:block;;

@@ -13,8 +13,9 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-//const host = "192.168.2.112"; // 家用
-const host = "192.168.31.208"; // 公司
+//const host = "192.168.2.112:8787"; // 家用
+//const host = "192.168.31.208:8787"; // 公司
+const host = "www.bj-evetime.com";
 
 module.exports = {
     entry: path.resolve(__dirname, 'app/app.js'),
@@ -24,7 +25,7 @@ module.exports = {
         * */
         path: path.join(__dirname, 'dist'),
         filename: 'javascripts/index.js',
-        publicPath: "http://"+host+":8787/"
+        publicPath: "http://"+host+"/"
     },
 
     //热部署相关配置

@@ -14,8 +14,10 @@ var Config =  {
     * 接口配置
     * */
     ApiConfig:{
-        getBarginInfo:_getFullUrlFromRelative("getGoodsInfo")
-    },
+        getBarginInfo:_getFullUrlFromRelative("postKanjia"),
+        getParticipationList:_getFullUrlFromRelative("getParticipationList"),
+        getFriendList:_getFullUrlFromRelative("getKanjiaList")
+    }
 };
 
 module.exports = Config;

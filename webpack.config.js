@@ -14,10 +14,6 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var isProduction = function () {
-    return process.env.NODE_ENV === 'production';
-};
-
 //const host = "192.168.2.112"; // 家用
 const host = "192.168.31.208"; // 公司
 

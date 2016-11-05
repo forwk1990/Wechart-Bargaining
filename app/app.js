@@ -10,8 +10,9 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import TipWindow from './views/TipWindow/TipWindow.jsx';
 import ConfirmWindow from './views/ConfirmWindow/ConfirmWindow.jsx';
 
-
 import DataStore from './libs/components/DataStore.js'
+
+import QueryString from 'query-string'
 
 import "animate.css"
 import "./assets/stylesheets/foundation.min.css"
@@ -61,9 +62,18 @@ class Container extends React.Component {
         FastClick.attach(document.body);
 
         /*
+        * 获取查询字符串
+        * */
+        var queryString = QueryString.extract("http://www.bj-evetime.com/kanjia/index.html?code=003E8gop0XsQQq1wgNmp0aLcop0E8go3&state=product=233&origin=23");
+        var queryItems = QueryString.parse(queryString);
+        const code = queryItems["code"];
+        const product = QueryString.parse(queryItems["state"])["product"];
+        if(!code || !product)return;
+
+        /*
         * 获取首页显示的砍价信息
         * */
-        DataStore.getBargainInfo({url: '', code: '', id: ''}).then(function (responseObject) {
+        DataStore.getBargainInfo({url: 'http://www.bj-evetime.com/kanjia/index.html', code: code, id: product}).then(function (responseObject) {
             responseObject["isFirst"] && self.setState({shouldBargin: true});
 
             self.setState({

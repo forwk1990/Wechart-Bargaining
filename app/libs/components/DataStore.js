@@ -11,9 +11,9 @@ if(__DEV__){
 
 let AppConfig = require("./AppConfig.js");
 
-let sendRequest = function(url,parameters){
+function sendRequest(url,parameters){
 
-    var promise = new Promise(function(resolve,reject){
+    return new Promise(function(resolve,reject){
 
         // initialize the form data
         var formData = new FormData();
@@ -22,12 +22,12 @@ let sendRequest = function(url,parameters){
         }
 
         /*
-         initialize the xml http request level2
-        * @discussion :
-        * 1、there are two types of XMLHttpRequest,XmlHttpRequest level1 and XmlHttpRequest level2
-        * 2、XmlHttpRequest level 1 is the old version,it can't send request across origin.
-        * 3、XmlHttpRequest level 2 is the newest version,it can send request across origin and build formData with new interface.
-        * */
+         * initialize the xml http request level2
+         * @discussion :
+         * 1、there are two types of XMLHttpRequest,XmlHttpRequest level1 and XmlHttpRequest level2
+         * 2、XmlHttpRequest level 1 is the old version,it can't send request across origin.
+         * 3、XmlHttpRequest level 2 is the newest version,it can send request across origin and build formData with new interface.
+         * */
         var client = new XMLHttpRequest();
         client.open('POST',url);
         client.onreadystatechange = handler;
@@ -51,8 +51,6 @@ let sendRequest = function(url,parameters){
             }
         }
     });
-
-    return promise;
 }
 
 module.exports = {
@@ -62,6 +60,20 @@ module.exports = {
     * */
     getBargainInfo:function(parameters){
         return sendRequest(AppConfig.ApiConfig.getBarginInfo,parameters);
+    },
+    /*
+     * 获取参与列表信息
+     * @param parameters:Object 请求参数
+     * */
+    getParticipationList:function(parameters){
+        return sendRequest(AppConfig.ApiConfig.getParticipationList,parameters);
+    },
+    /*
+     * 获取好友榜列表信息
+     * @param parameters:Object 请求参数
+     * */
+    getFriendList:function(parameters){
+        return sendRequest(AppConfig.ApiConfig.getFriendList,parameters);
     }
 };
 

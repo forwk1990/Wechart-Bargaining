@@ -86,50 +86,75 @@ class CountDown extends Component{
     }
 
     render(){
+        var self = this;
+
+        const titleItems = ['剩余天','时','分','秒'].map(function(title){
+            return (
+                <div key={title} className="small-3 columns cd-column cd-column-title">
+                    {title}
+                </div>
+            );
+        });
+
+        const valueItems = ['day','hours','minutes','seconds'].map(function(propertyName){
+            return (
+                <div key={propertyName} className="small-3 columns cd-column cd-column-value">
+                    {self.state[propertyName]}
+                </div>
+            );
+        });
+
         return (
-            <div className="row count-down">
-                <div className="small-3 columns">
-                    <div className="row">
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-title">剩余天</span>
-                        </div>
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-value">{this.state.day}</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="small-3 columns">
-                    <div className="row">
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-title">时</span>
-                        </div>
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-value">{this.state.hours}</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="small-3 columns">
-                    <div className="row">
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-title">分</span>
-                        </div>
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-value">{this.state.minutes}</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="small-3 columns">
-                    <div className="row">
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-title">秒</span>
-                        </div>
-                        <div className="small-12 columns padding-clear">
-                            <span className="count-down-value">{this.state.seconds}</span>
-                        </div>
-                    </div>
-                </div>
+            <div className="row cd-row">
+                {titleItems}
+                {valueItems}
             </div>
         );
+
+        //return (
+        //    <div className="row count-down">
+        //        <div className="small-3 columns">
+        //            <div className="row">
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-title">剩余天</span>
+        //                </div>
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-value">{this.state.day}</span>
+        //                </div>
+        //            </div>
+        //        </div>
+        //        <div className="small-3 columns">
+        //            <div className="row">
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-title">时</span>
+        //                </div>
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-value">{this.state.hours}</span>
+        //                </div>
+        //            </div>
+        //        </div>
+        //        <div className="small-3 columns">
+        //            <div className="row">
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-title">分</span>
+        //                </div>
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-value">{this.state.minutes}</span>
+        //                </div>
+        //            </div>
+        //        </div>
+        //        <div className="small-3 columns">
+        //            <div className="row">
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-title">秒</span>
+        //                </div>
+        //                <div className="small-12 columns padding-clear">
+        //                    <span className="count-down-value">{this.state.seconds}</span>
+        //                </div>
+        //            </div>
+        //        </div>
+        //    </div>
+        //);
     }
 
 }

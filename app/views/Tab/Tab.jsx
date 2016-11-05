@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import './Tab.scss'
 
+import DataStore from '../../libs/components/DataStore.js'
+
 function stringFormat() {
     var s = arguments[0];
     for (var i = 0; i < arguments.length - 1; i++) {
@@ -29,12 +31,12 @@ const cells1 = [
         imageUrl:"http://tse1.mm.bing.net/th?id=OIF.QFi8PUwFGRV3NWmi3xipFw&w=164&h=150&c=7&rs=1&qlt=90&o=4&pid=1.1"
     },
     {
-        text:"不忘初心，人胖多砍价，人笨多砍价，一口气砍掉<span>{0}</span>元",
+        text:"snail,帮你砍掉<span>34.27</span>元,我和我的小伙伴都惊呆了！",
         money:1500,
         imageUrl:"http://tse2.mm.bing.net/th?id=OIP.Mb43b2b47a3d879695bb1c68a33c579d0o0&w=188&h=130&c=7&rs=1&qlt=90&o=4&pid=1.1"
     },
     {
-        text:"不忘初心，人胖多砍价，人笨多砍价，一口气砍掉<span>{0}</span>元",
+        text:"Mars，说专治各种砍价，不服来砍，帮你砍掉<span>35.02</span>元!",
         money:1500,
         imageUrl:"http://tse1.mm.bing.net/th?&id=OIP.M3a8fa550ab36ad61523395de99cb4ecdo0&w=300&h=296&c=0&pid=1.9&rs=0&p=0&r=0"
     }
@@ -167,7 +169,9 @@ class Tab extends Component{
     constructor(props){
         super(props);
         this.state = {
-            selectedIndex : 1
+            selectedIndex : 1,
+            friendData:[],
+            participationData:[]
         };
     }
 
@@ -178,6 +182,31 @@ class Tab extends Component{
 
     //组件状态更新时调用
     componentDidUpdate(prevProps, prevState) {
+
+    }
+
+    componentDidMount(){
+        var self = this;
+        /*
+         * 获取首页显示的砍价信息
+         * */
+        DataStore.getFriendList({id:""}).then(function (responseObject) {
+            console.info(responseObject);
+            self.setState({
+                friendData:responseObject
+            });
+        }, function (error) {
+            console.info(error);
+        });
+
+        DataStore.getParticipationList({id:"",page:0}).then(function (responseObject) {
+            console.info(responseObject);
+            self.setState({
+                participationData:responseObject
+            });
+        }, function (error) {
+            console.info(error);
+        });
 
     }
 
@@ -202,9 +231,9 @@ class Tab extends Component{
                         })}
                     </div>
                     <div className="row tab-page padding-clear">
-                        <TabPageTableView cells={cells1} index="0" selectedIndex={this.state.selectedIndex}/>
+                        <TabPageTableView cells={this.state.friendData} index="0" selectedIndex={this.state.selectedIndex}/>
                         <TabPageRulePage index="1" selectedIndex={this.state.selectedIndex}/>
-                        <TabPageTableView cells={cells2} index="2" selectedIndex={this.state.selectedIndex}/>
+                        <TabPageTableView cells={this.state.participationData} index="2" selectedIndex={this.state.selectedIndex}/>
                     </div>
                 </div>
             </div>
