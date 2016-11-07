@@ -105,9 +105,13 @@ class CountDown extends Component{
         });
 
         return (
-            <div className="row cd-row">
-                {titleItems}
-                {valueItems}
+            <div>
+                <div className="row cd-row">
+                    {titleItems}
+                </div>
+                <div className="row cd-row">
+                    {valueItems}
+                </div>
             </div>
         );
 

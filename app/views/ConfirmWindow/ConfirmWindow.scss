@@ -19,7 +19,7 @@
   .confirm-modal-content {
     border-radius: 4px;
     display: block;
-    position: absolute;
+    position: fixed;
     margin: auto auto;
     padding: 0 !important;
     top: calc(50% - 7.25rem);

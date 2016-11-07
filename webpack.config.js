@@ -14,8 +14,8 @@
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-//const host = "192.168.2.112"; // 家用
-const host = "192.168.31.208"; // 公司
+const host = "192.168.2.112"; // 家用
+//const host = "192.168.31.208"; // 公司
 
 module.exports = {
     entry: path.resolve(__dirname, 'app/app.js'),
